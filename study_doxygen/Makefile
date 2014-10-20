@@ -19,6 +19,8 @@ else
 	CFLAGS = -Wall -O2
 endif
 
+INCDIR = -I./Include/
+CFLAGS += $(INCDIR)
 COMPILE = $(CXX) -c $(CFLAGS) -o
 
 SRCDIR = ./Src/
@@ -29,13 +31,13 @@ OBJECTS = $(OBJDIR)main.o
 ##### Set up for Link
 LIBDIR =
 LIBS = -lglut\
-			 -lGL\
 			 -lGLU\
-			 -lm\
+			 -lGL\
+			 -lXmu
 
 LINK_STATIC = ar rcvs
-LINK_SHARE = g++ -shared $(LIBDIR) $(LIBS) -o
-LINK = g++ $(LIBDIR) $(LIBS) -o
+LINK_SHARE = g++ -shared -o
+LINK = g++ -o
 
 TARGET = ./Bin/$(BUILD_TYPE)/test
 
@@ -51,7 +53,7 @@ DOXYHTML = $(DOXYDIR)html/
 all: $(TARGET) $(DOCUMENT)
 
 $(TARGET): $(OBJECTS)
-	$(LINK) $(TARGET) $(OBJECTS) $(LIBS) $(OPTIONS)
+	$(LINK) $@ $< $(LIBDIR) $(LIBS)
 
 $(OBJDIR)main.o: $(OBJDIR) $(SRCDIR)main.cxx
 	$(COMPILE) $(OBJDIR)main.o $(SRCDIR)main.cxx

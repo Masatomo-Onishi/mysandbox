@@ -7,10 +7,16 @@
 
 var indexSectionsWithContent =
 {
+  0: "dim",
+  1: "m",
+  2: "dim"
 };
 
 var indexSectionNames =
 {
+  0: "all",
+  1: "files",
+  2: "functions"
 };
 
 function convertToId(search)
